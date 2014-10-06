@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <title>OurHelper</title>
-        <link rel="stylesheet" type="text/css" href="less/my-bootstrap-theme.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/my-bootstrap-theme.css">
         <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     </head>
