@@ -1,0 +1,19 @@
+commit c1da7c2a28c2b809e1435263f59383dfe1986764
+Author: Vincent Druschke <vtdrusch@c28-0117-05.ad.mtu.edu>
+Date:   Fri Oct 10 15:46:32 2014 -0400
+
+    more link fixes
+
+diff --git a/app/views/home/about.blade.php~ b/app/views/home/about.blade.php~
+index 7113eb1..0fbd024 100644
+--- a/app/views/home/about.blade.php~
++++ b/app/views/home/about.blade.php~
+@@ -95,7 +95,7 @@
+                         <span class="icon-bar"></span>
+                         <span class="icon-bar"></span>
+                     </button>
+-                    {{HTML::link("/home", 'LITTLEHelpers')}}
++                    {{HTML::link("/home", 'LITTLEHelpers', array('class'=>'navbar-brand'))}}
+                 </div>
+                 <!-- Collect the nav links, forms, and other content for toggling -->
+                 <div class="collapse navbar-collapse" id="navbarCollapse">

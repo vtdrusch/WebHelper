@@ -11,7 +11,11 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('index');
-});
+Route::get('/', 'HomeController@showIndex');
+Route::get('/home', 'HomeController@showIndex');
+Route::get('/about', 'HomeController@showAbout');
+Route::get('/contact', 'HomeController@showContact');
+Route::get('/signup', 'HomeController@showSignup');
+
+Route::get('/resources', 'ResourcesController@showIndex');
+Route::get('/forum', 'ForumController@showIndex');
