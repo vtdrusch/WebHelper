@@ -26,8 +26,8 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array('npy'),
-
+	'local' => array('homestead'),
+	
 ));
 
 /*
