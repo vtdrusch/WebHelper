@@ -1,0 +1,43 @@
+html {
+    background: white;
+    background-size: cover;
+}
+
+body {
+  background-color: #f8f8f8;
+  padding-top: 90px;
+  font-size: 16px;
+  font-family: "Open Sans", serif;
+  background: transparent; 
+}
+
+.margin-base-vertical {
+  margin: 40px 0;
+}
+
+h1 {
+  font-family: 'Patua One', cursive;
+  font-weight: 400;
+  font-size: 40px;
+}
+
+h2 {
+    font-family: 'Patua One', cursive;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.whiteText {
+    color: white;
+}
+
+.blackText {
+    color: black;
+}
+
+/* Override B3 .panel adding a subtly transparent background */
+.panel {
+  background-color: rgba(255,255,255,0.85);
+  margin: 0 0 20px 0;
+  padding: 10px;
+}

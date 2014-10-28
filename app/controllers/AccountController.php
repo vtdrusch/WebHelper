@@ -27,4 +27,7 @@ class AccountController extends BaseController {
 		return View::make('account.signup');
 	}
 	
+    public function getProfile() {
+        return View::make('account.profile');
+    }
 }
