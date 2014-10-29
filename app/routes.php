@@ -21,6 +21,9 @@ Route::get('contact', 'HomeController@getContact');
 | Controllers
 |--------------------------------------------------------------------------
 */
+
 Route::controller('account', 'AccountController');
-Route::controller('resources', 'ResourceController');
+Route::controller('admin', 'AdminController');
 Route::controller('forum', 'ForumController');
+Route::controller('resources', 'ResourceController');
+Route::controller('test', 'TestController');

@@ -32,7 +32,7 @@ class ExampleTest extends TestCase {
 	}
 	
 	//Tests account signin post works
-	public function testSignin()
+	public function testSigin()
 	{
 		$crawler = $this->client->request('post', 'account/signin');
 
@@ -40,7 +40,7 @@ class ExampleTest extends TestCase {
 	}
 	
 	//Tests account signup post works
-	public function testSignup()
+	public function testHomeRedirect()
 	{
 		$crawler = $this->client->request('post', 'account/sigup');
 

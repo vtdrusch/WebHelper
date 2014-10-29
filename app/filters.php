@@ -43,11 +43,20 @@ Route::filter('auth', function()
 		}
 		else
 		{
-			return Redirect::guest('login');
+			return Redirect::guest('account/signin')
+			->withMessage(array('type' => 'info', 'message' => "Please signin before accessing the requested page."));
 		}
 	}
 });
 
+Route::filter('admin', function()
+{
+	if (!Auth::user()->isAdmin())
+	{
+		return Redirect::guest('/')
+		->withMessage(array('type' => 'danger', 'message' => "You don't have the correct permissions to access the requested page."));
+	}
+});
 
 Route::filter('auth.basic', function()
 {

@@ -13,16 +13,18 @@
     <!-- Bootstrap core CSS -->
     <!--<link rel="stylesheet" type="text/css" href="less/my-bootstrap-theme.css">-->
     {{HTML::style('assets/css/my-bootstrap-theme.css')}}
+    {{HTML::style('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css')}}
 
     <!-- Custom styles for this template -->
-    {{HTML::style('assets/css/custom-theme.css')}}
+    {{HTML::style('assets/css/cover.css')}}
 
     <!-- Custom font -->
     {{HTML::style('//fonts.googleapis.com/css?family=Patua+One')}}
+    <!--link href='http://fonts.googleapis.com/css?family=Patua+One' rel='stylesheet' type='text/css'-->
       
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+    <!--script src="../../assets/js/ie-emulation-modes-warning.js" /-->
 
     <!-- Latest compiled and minified JavaScript -->
     {{HTML::script('//code.jquery.com/jquery-2.1.1.min.js')}}
@@ -33,6 +35,60 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+      
+    <style>
+        html {
+            background: white;
+            background-size: cover;
+        }
+
+        body {
+          padding-top: 80px;
+          font-size: 16px;
+          font-family: "Open Sans", serif;
+          background: transparent; 
+        }
+
+        .margin-base-vertical {
+          margin: 40px 0;
+        }
+
+        h1 {
+          font-family: 'Patua One', cursive;
+          font-weight: 400;
+          font-size: 40px;
+        }
+        
+        h2 {
+            font-family: 'Patua One', cursive;
+            font-weight: 400;
+            font-size: 20px;
+        }
+        
+        .signup {
+            
+        }
+        
+        .whiteText {
+            color: white;
+        }
+        
+        .blackText {
+            color: black;
+        }
+        
+        /* Override B3 .panel adding a subtly transparent background */
+        .panel {
+          background-color: rgba(255,255,255,0.85);
+          margin: 0 0 20px 0;
+          padding: 10px;
+        }
+
+        span.input-group-addon {
+          min-width: 45px;
+        }
+
+    </style>
 
     @yield('head')
     
@@ -55,13 +111,28 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="nav navbar-nav navbar-left">
-          	<li>{{HTML::link("/forum", 'Forum')}}</li>
-          	<li>{{HTML::link("/resources", 'Resources')}}</li>
-          	<li>{{HTML::link("/about", 'About')}}</li>
-          	<li>{{HTML::link("/contact", 'Contact')}}</li>
-            <li>{{HTML::link("account/profile", 'Profile')}}</li>
-
+          	<li>{{HTML::link("forum", 'Forum')}}</li>
+          	<li>{{HTML::link("resources", 'Resources')}}</li>
+          	<li>{{HTML::link("about", 'About')}}</li>
+          	<li>{{HTML::link("contact", 'Contact')}}</li>
           </ul>
+          @if(Auth::check())
+          <ul class="nav navbar-nav navbar-right" style="margin-right: 50px">
+            <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">{{Auth::user()->username}}<span class="caret"></span></a>
+              <ul role="menu" class="dropdown-menu">
+                @if(Auth::user()->isAdmin())
+                <li class="dropdown-header">Admin</li>
+                <li><a href="{{URL::to('admin')}}">Dashboard</a></li>
+                @endif
+                <li class="dropdown-header">My Profile</li>
+                <li><a href="#">Account</a></li>
+                <li class="divider"></li>
+                <li><a href="{{URL::to('account/signout')}}">Signout</a></li>
+              </ul>
+            </li>
+          </ul>
+          @endif
         </div>
       </div>
     </nav>

@@ -1,23 +1,32 @@
 <?php
 
-class ResourceController extends BaseController {
+class TestController extends BaseController {
 
 	/*
 	|--------------------------------------------------------------------------
-	| Default Home Controller
+	| Test Controller
 	|--------------------------------------------------------------------------
 	|
 	| You may wish to use controllers instead of, or in addition to, Closure
 	| based routes. That's great! Here is an example controller method to
 	| get you started. To route to this controller, just add the route:
 	|
-	|	Route::get('/', 'HomeController@showWelcome');
+	|	Route::get('test', 'TestController@showWelcome');
 	|
 	*/
 
 	public function getIndex()
 	{
-		return View::make('resources.index');
+		return "TEST";
+	}
+	
+	public function getDbconnection() {
+		if(DB::connection()->getDatabaseName())
+		{
+		   echo "connected sucessfully to database ".DB::connection()->getDatabaseName();
+		}
+		else
+			echo "Cannot connect to database.";
 	}
 	
 }
