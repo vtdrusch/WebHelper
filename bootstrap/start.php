@@ -26,7 +26,7 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array('homestead', 'skyrim'),
+	'local' => array('homestead', 'skyrim', 'npy', 'jor', 'OptimusPrime')
 
 ));
 

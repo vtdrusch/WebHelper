@@ -15,9 +15,10 @@ class ResourcesController extends BaseController {
 	|
 	*/
 
-	public function showIndex()
+	public function getIndex()
 	{
-		return View::make('resources.index');
+		$groups = Group::with('resources');
+		return View::make('resources.index')->withGroups($groups);
 	}
 	
 }

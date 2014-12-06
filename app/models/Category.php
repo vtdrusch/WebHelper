@@ -10,12 +10,13 @@ class Category extends Eloquent {
 	protected $table = 'categories';
 
 	public static $rules = array(
-		'title'=>'required',
-		'category'=>'unique:categories|required'
+		'title' => 'required',
+		'category'=>'unique:categories|required',
+		'description'=>'required'
 	);
 
-	public function resources() {
-		return $this->hasMany('Resource');
-	}	
+	public function topics() {
+		return $this->hasMany('Topic');
+	}
 
 }

@@ -18,25 +18,31 @@ class AdminController extends BaseController {
     {
         $this->beforeFilter('auth', array('on' => array('get', 'post', 'show')));
         $this->beforeFilter('admin', array('on' => array('get', 'post', 'show')));
-
         $this->beforeFilter('csrf', array('on' => 'post'));
-
-        //$this->afterFilter('log', array('only' => array('fooAction', 'barAction')));
     }
 
 	public function getIndex()	{
-		$categories = Category::with('resources')->get();
-		return View::make('admin.index')->withCategories($categories);
+		return View::make('admin.index');
 	}
 
-	public function postCategory() {
+	public function getResources() {
+		$groups = Group::with('resources')->get();
+		return View::make('admin.resources')->withGroups($groups);
+	}
+
+	public function getForum() {
+		$categories = Category::all();
+		return View::make('admin.forum')->withCategories($categories);
+	}
+
+	public function postGroup() {
 		$validator = Validator::make(Input::all(), Category::$rules);
 		if ($validator->passes()) {
 			// create DB entry
-			$category = new Category;
-			$category->title = Input::get('title');
-			$category->category = Input::get('category');
-			$category->save();
+			$group = new Group;
+			$group->title = Input::get('title');
+			$group->group = Input::get('group');
+			$group->save();
 			return Redirect::to('admin')
 					->withMessage(array('type' => 'success', 'message' => 'Group created!'));
 		}
@@ -52,32 +58,32 @@ class AdminController extends BaseController {
 			$resource = new Resource;
 			$resource->title = Input::get('title');
 			$resource->url = Input::get('url');
-			$resource->category_id = Input::get('category_id');
+			$resource->group_id = Input::get('group_id');
 			$resource->description = Input::get('description');
 			$resource->save();
-			return Redirect::to('admin')
+			return Redirect::to('admin/resources')
 					->withMessage(array('type' => 'success', 'message' => 'Resource created!'));
 		}
-		return Redirect::to('admin')
+		return Redirect::to('admin/resources')
 				->withMessage(array('type' => 'danger', 'message' => 'Failed to create resource. Please correct the following errors.'))
 				->withErrors($validator)->withInput(Input::all());
 	}
 
-	public function postSignin() {
-		$name = Input::get('username');
-		$password = Input::get('password');
-
-		if (Auth::attempt(array('username'=>$name, 'password'=>$password))) {
-			return Redirect::to('home');
-		} 
-		return Redirect::to('account/signin')
-				->withMessage(array('type' => 'danger', 'message' => 'Your username/password combination was incorrect.'));
-	}
-
-	public function getSignout() {
-		Auth::logout();
-		return Redirect::to('account/signin')
-			->withMessage(array('type' => 'success', 'message' => 'You have been successfully signed out.'));
+	public function postCategory() {
+		$validator = Validator::make(Input::all(), Category::$rules);
+		if ($validator->passes()) {
+			// create DB entry
+			$category = new Category;
+			$category->title = Input::get('title');
+			$category->category = Input::get('category');
+			$category->description = Input::get('description');
+			$category->save();
+			return Redirect::to('admin/forum')
+					->withMessage(array('type' => 'success', 'message' => 'Category Created.'));
+		}
+		return Redirect::to('admin/forum')
+				->withMessage(array('type' => 'danger', 'message' => 'Failed to create category.'))
+				->withErrors($validator)->withInput(Input::all());
 	}
 	
 }

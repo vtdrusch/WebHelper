@@ -11,10 +11,18 @@
 |
 */
 
-Route::get('/', 'HomeController@getIndex');
-Route::get('home', 'HomeController@getIndex');
+Route::get('/', function() {
+	if(Auth::check()) {
+		return Redirect::to('account/profile');
+	}
+	return View::make('home.index');
+});
+Route::get('home', function() {
+	return Redirect::to('/');
+});
 Route::get('about', 'HomeController@getAbout');
 Route::get('contact', 'HomeController@getContact');
+Route::post('contact', 'HomeController@postContact');
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +34,5 @@ Route::controller('account', 'AccountController');
 Route::controller('admin', 'AdminController');
 Route::controller('forum', 'ForumController');
 Route::controller('resources', 'ResourceController');
+Route::controller('user', 'UserController');
 Route::controller('test', 'TestController');

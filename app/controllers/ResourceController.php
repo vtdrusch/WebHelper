@@ -17,7 +17,12 @@ class ResourceController extends BaseController {
 
 	public function getIndex()
 	{
-		return View::make('resources.index');
+		$groups = Group::with('resources');
+		$favorites = null;
+		if(!Auth::guest()) {
+			$favorites = Auth::user()->resources;
+		}
+		return View::make('resources.index')->withGroups($groups->get())->withFavorites($favorites);
 	}
 	
 }

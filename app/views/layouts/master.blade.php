@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <meta name="_token" content="{{ csrf_token() }}" />
     <title>
       @yield('title', 'LITTLEhelpers')
     </title>
 
     <!-- Bootstrap core CSS -->
-    <!--<link rel="stylesheet" type="text/css" href="less/my-bootstrap-theme.css">-->
     {{HTML::style('assets/css/my-bootstrap-theme.css')}}
     {{HTML::style('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css')}}
 
     <!-- Custom styles for this template -->
-    {{HTML::style('assets/css/cover.css')}}
+    <!--{{HTML::style('assets/css/custom-theme.css')}}-->
+    {{HTML::style('assets/css/style.css')}}
+    {{HTML::style('assets/css/style-responsive.css')}}
+    {{HTML::style('assets/css/loading.css')}}
 
     <!-- Custom font -->
-    {{HTML::style('//fonts.googleapis.com/css?family=Patua+One')}}
-    <!--link href='http://fonts.googleapis.com/css?family=Patua+One' rel='stylesheet' type='text/css'-->
+    {{HTML::style('http://fonts.googleapis.com/css?family=Carrois+Gothic')}}
       
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <!--script src="../../assets/js/ie-emulation-modes-warning.js" /-->
+    <!--script src="../../assets/js/ie-emulation-modes-warning.js"></script-->
 
     <!-- Latest compiled and minified JavaScript -->
     {{HTML::script('//code.jquery.com/jquery-2.1.1.min.js')}}
@@ -35,60 +37,6 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-      
-    <style>
-        html {
-            background: white;
-            background-size: cover;
-        }
-
-        body {
-          padding-top: 80px;
-          font-size: 16px;
-          font-family: "Open Sans", serif;
-          background: transparent; 
-        }
-
-        .margin-base-vertical {
-          margin: 40px 0;
-        }
-
-        h1 {
-          font-family: 'Patua One', cursive;
-          font-weight: 400;
-          font-size: 40px;
-        }
-        
-        h2 {
-            font-family: 'Patua One', cursive;
-            font-weight: 400;
-            font-size: 20px;
-        }
-        
-        .signup {
-            
-        }
-        
-        .whiteText {
-            color: white;
-        }
-        
-        .blackText {
-            color: black;
-        }
-        
-        /* Override B3 .panel adding a subtly transparent background */
-        .panel {
-          background-color: rgba(255,255,255,0.85);
-          margin: 0 0 20px 0;
-          padding: 10px;
-        }
-
-        span.input-group-addon {
-          min-width: 45px;
-        }
-
-    </style>
 
     @yield('head')
     
@@ -96,7 +44,7 @@
 
   <body>
     <!-- NAVBAR ================================================== -->
-    <nav id="myNavbar" class="navbar navbar-inverse navbar-fixed-top" role="navigation"> <!-- Fixed to top of screen -->
+    <nav id="myNavbar" class="navbar navbar-default navbar-fixed-top" role="navigation"> <!-- Fixed to top of screen -->
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="container">
         <div class="navbar-header">
@@ -105,16 +53,21 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </button>
-          {{HTML::link("/home", 'LITTLEHelpers', array('class'=>'navbar-brand'))}}
+        </button>
+        
+        <a class="navbar-brand">
+            {{HTML::image('assets/img/panda_logo.png', 'logo', array('class' => 'brand'))}}
+        </a>
+        {{HTML::link("/home", 'LITTLE Helpers', array('class'=>'navbar-brand'))}}
+
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="nav navbar-nav navbar-left">
-          	<li>{{HTML::link("forum", 'Forum')}}</li>
-          	<li>{{HTML::link("resources", 'Resources')}}</li>
-          	<li>{{HTML::link("about", 'About')}}</li>
-          	<li>{{HTML::link("contact", 'Contact')}}</li>
+          	<li>{{HTML::link("/forum", 'Forum')}}</li>
+          	<li>{{HTML::link("/resources", 'Resources')}}</li>
+          	<li>{{HTML::link("/about", 'About')}}</li>
+          	<li>{{HTML::link("/contact", 'Help')}}</li>
           </ul>
           @if(Auth::check())
           <ul class="nav navbar-nav navbar-right" style="margin-right: 50px">
@@ -126,7 +79,7 @@
                 <li><a href="{{URL::to('admin')}}">Dashboard</a></li>
                 @endif
                 <li class="dropdown-header">My Profile</li>
-                <li><a href="#">Account</a></li>
+                <li><a href="{{URL::to('account/profile')}}">Profile</a></li>
                 <li class="divider"></li>
                 <li><a href="{{URL::to('account/signout')}}">Signout</a></li>
               </ul>
@@ -139,8 +92,28 @@
 
     <!-- CONTENT ================================================ -->
     @yield('content')
+
+    <!-- Loading Overlay -->
+    <div id="loading" class="loading" hidden="true">Loading&#8230;</div>
   </body>
 
   @yield('scripts')
+  <script type="text/JavaScript"> 
+    $(function() {
+      $.ajaxSetup({
+        headers: {
+            'X-CSRF-Token': $('meta[name="_token"]').attr('content')
+        }
+      });
 
+      $( document ).ajaxStart(function() {
+        $( "#loading" ).show();
+      });
+
+      $( document ).ajaxStop(function() {
+        $( "#loading" ).hide();
+      });
+
+    });
+  </script>
 </html>

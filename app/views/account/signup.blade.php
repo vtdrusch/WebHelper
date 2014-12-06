@@ -32,20 +32,20 @@
         <h2>Join Little Helper today</h2>
         {{ Form::open(array('url' => 'account/signup')) }}
           <p class="input-group">
-            <span class="input-group-addon">Username</span>
-            <input type="text" class="form-control intput-lg" name="username" placeholder="" />
+            <span class="input-group-addon"><i class="fa fa-user fa-lg"></i></span>
+            <input type="text" class="form-control intput-lg" name="username" placeholder="Username" />
           </p>
           <p class="input-group">
-            <span class="input-group-addon">Email</span>
-            <input type="text" class="form-control intput-lg" name="email" placeholder="" />
+            <span class="input-group-addon"><i class="fa fa-envelope fa-lg"></i></span>
+            <input type="text" class="form-control intput-lg" name="email" placeholder="Email" />
           </p>
           <p class="input-group">
-            <span class="input-group-addon">Password</span>
-            <input type="password" class="form-control intput-lg" name="password" placeholder="" />
+            <span class="input-group-addon"><i class="fa fa-asterisk fa-lg"></i></span>
+            <input type="password" class="form-control intput-lg" name="password" placeholder="Password" />
           </p>
           <p class="input-group">
-            <span class="input-group-addon">Confirm Password</span>
-            <input type="password" class="form-control intput-lg" name="password_confirmation" placeholder="" />
+            <span class="input-group-addon"><i class="fa fa-asterisk fa-lg"></i></span>
+            <input type="password" class="form-control intput-lg" name="password_confirmation" placeholder="Confirm Password" />
           </p>
           <p class="text-right">
             <button type="submit" class="btn btn-primary btn-md">

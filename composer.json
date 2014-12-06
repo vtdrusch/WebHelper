@@ -6,7 +6,8 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"fideloper/proxy": "dev-master"
+		"fideloper/proxy": "dev-master",
+		"intervention/image": "~2.0"
 	},
 	"autoload": {
 		"classmap": [

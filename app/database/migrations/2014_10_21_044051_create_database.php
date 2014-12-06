@@ -15,11 +15,11 @@ class CreateDatabase extends Migration {
 		if(!Schema::hasTable('users')) {
 			Schema::create('users', function($table)
 			{
-				$table->increments('id');			
+				$table->increments('id');		
 				$table->string('username')->unique();
 				$table->string('email')->unique();
 				$table->char('password', '64');
-				$table->boolean('confirmed')->default(0);
+				$table->char('confirmed', '32')->default('0');
 				$table->rememberToken();
 				$table->timestamps();
 			});

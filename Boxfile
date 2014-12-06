@@ -10,6 +10,7 @@ web1:
     - xcache
     - mysqli
     - mysql
+    - gd
   php_session_save_handler: redis
   php_session_save_path: "tcp://tunnel.pagodabox.com:6379"
   shared_writable_dirs:
@@ -18,6 +19,7 @@ web1:
     - app/storage/meta
     - app/storage/sessions
     - app/storage/views
+    - public/uploads
   after_build:
     - "if [ ! -f composer.phar ]; then curl -s http://getcomposer.org/installer | php; fi; php composer.phar install --prefer-source --no-progress --no-dev"
   after_deploy:

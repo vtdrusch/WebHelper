@@ -17,7 +17,7 @@ class BaseController extends Controller {
 
 	public function missingMethod($parameters = array())
 	{
-	    return "Methon not found";
+	    return "Method not found";
 	}
 
 }

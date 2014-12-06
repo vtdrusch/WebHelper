@@ -1,9 +1,11 @@
-<?php namespace Fideloper\Proxy;
+<?php
+
+namespace Fideloper\Proxy;
 
 use Illuminate\Support\ServiceProvider;
 
-class ProxyServiceProvider extends ServiceProvider {
-
+class ProxyServiceProvider extends ServiceProvider
+{
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -12,10 +14,10 @@ class ProxyServiceProvider extends ServiceProvider {
     protected $defer = false;
 
     /**
-     * Add trusted proxies from config
-     * On boot, to ensure configs are loaded
-     * before we attempt to find configured
-     * trusted proxies
+     * Add trusted proxies from config.
+     *
+     * We do this on boot, to ensure all the configuration has been loaded
+     * before we attempt to find configured trusted proxies.
      *
      * @return void
      */
@@ -26,14 +28,13 @@ class ProxyServiceProvider extends ServiceProvider {
         $request = $this->app['request'];
         $proxies = $this->app['config']->get('proxy::proxies');
 
-        if( $proxies === '*' )
-        {
-            // Trust all proxies - proxy is whatever
-            // the current client IP address is
-            $proxies = array( $request->getClientIp() );
+        if ($proxies === '*') {
+            // Trust all proxies
+            // Accept all current client IP addresses
+            $proxies = $request->getClientIps();
         }
 
-        $request->setTrustedProxies( $proxies );
+        $request->setTrustedProxies($proxies);
     }
 
     /**
@@ -45,5 +46,4 @@ class ProxyServiceProvider extends ServiceProvider {
     {
         // No services registered
     }
-
 }

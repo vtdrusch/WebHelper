@@ -22,7 +22,7 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'db4free.net:3306',
+			'host'      => 'db4free.net',
 			'database'  => 'webhelper',
 			'username'  => 'webhelper',
 			'password'  => 'webhelpers',

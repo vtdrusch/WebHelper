@@ -12,8 +12,8 @@ class CreateResourcesTable extends Migration {
 	 */
 	public function up()
 	{
-		if(!Schema::hasTable('categories')) {
-			Schema::create('categories', function($table)
+		if(!Schema::hasTable('groups')) {
+			Schema::create('groups', function($table)
 			{
 				$table->increments('id');
 				$table->string('title');
@@ -29,9 +29,19 @@ class CreateResourcesTable extends Migration {
 				$table->string('title');
 				$table->string('url');
 				$table->text('description');
-				$table->integer('category_id')->unsigned();
-				$table->foreign('category_id')->references('id')->on('categories');
+				$table->integer('favorites')->unsigned()->default(0);
+				$table->integer('group_id')->unsigned();
+				$table->foreign('group_id')->references('id')->on('groups');
 				$table->timestamps();
+			});
+		}
+		if(!Schema::hasTable('resource_user')) {
+			Schema::create('resource_user', function($table)
+			{
+				$table->integer('user_id')->unsigned();
+				$table->integer('resource_id')->unsigned();
+	            $table->foreign('user_id')->references('id')->on('users');
+	            $table->foreign('resource_id')->references('id')->on('resources');
 			});
 		}
 	}
@@ -43,8 +53,9 @@ class CreateResourcesTable extends Migration {
 	 */
 	public function down()
 	{
+		Schema::dropIfExists('resource_user');
 		Schema::dropIfExists('resources');
-		Schema::dropIfExists('categories');
+		Schema::dropIfExists('groups');
 	}
 
 }

@@ -15,8 +15,8 @@ class Resource extends Eloquent {
 		'category_id'=>'required'
 	);
 
-	public function category() {
-		return $this->belongsTo('Category');
+	public function group() {
+		return $this->belongsTo('Group');
 	}
 
 }
